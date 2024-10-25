@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+      }
+      header h1 {
+        margin: 0;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      article {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+      }
+      article h2 {
+        color: #333;
+        margin-top: 0;
+      }
+      article p {
+        line-height: 1.6;
+      }
+      .meta {
+        font-size: 0.9em;
+        color: #777;
+      }
+      .meta strong {
+        color: #333;
+      }
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #777;
+      }
+      footer p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Blog Posts</h1>
+    </header>
+
+    <div class="container">
+      {% for post in posts %}
+      <article>
+        <h2>{{ post.title }}</h2>
+        <p class="meta">
+          <strong>Author:</strong> {{ post.author.username }} &bull;
+          <strong>Published on:</strong> {{ post.publish|date:"F j, Y, g:i a" }}
+          &bull; <strong>Status:</strong> {{ post.get_status_display }}
+        </p>
+        <p>{{ post.body|truncatewords:30 }}</p>
+        <a href="{% url 'blog:post_detail' slug=post.slug %}">Read more...</a>
+      </article>
+      {% empty %}
+      <p>No blog posts available.</p>
+      {% endfor %}
+    </div>
+
+    <footer>
+      <p>&copy; 2024 My Blog</p>
+    </footer>
+  </body>
+</html>

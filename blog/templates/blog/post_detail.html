@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ post.title }}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+      }
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      article {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+      }
+      article h2 {
+        color: #333;
+        margin-top: 0;
+      }
+      .meta {
+        font-size: 0.9em;
+        color: #777;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{{ post.title }}</h1>
+    </header>
+
+    <div class="container">
+      <article>
+        <p class="meta">
+          <strong>Author:</strong> {{ post.author.username }} &bull;
+          <strong>Published on:</strong> {{ post.publish|date:"F j, Y, g:i a" }}
+          &bull; <strong>Status:</strong> {{ post.get_status_display }}
+        </p>
+        <p>{{ post.body }}</p>
+      </article>
+      <a href="{% url 'blog:post_list' %}">Back to all posts</a>
+    </div>
+  </body>
+</html>
